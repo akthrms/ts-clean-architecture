@@ -13,4 +13,9 @@ export interface ITodoRepository {
    * 全件取得する
    */
   findMany(): Todo[];
+
+  /**
+   * 全件削除する
+   */
+  removeMany(): void;
 }

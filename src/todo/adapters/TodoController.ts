@@ -1,4 +1,9 @@
 import type {
+  ResetTodoInteractor,
+  ResetTodoRequest,
+  ResetTodoResponse,
+} from "../usecases/ResetTodoUsecase";
+import type {
   CreateTodoInteractor,
   CreateTodoRequest,
   CreateTodoResponse,
@@ -18,7 +23,8 @@ export class TodoController {
    */
   public constructor(
     private readonly createTodoInteractor: CreateTodoInteractor,
-    private readonly getListTodoInteractor: GetListTodoInteractor
+    private readonly getListTodoInteractor: GetListTodoInteractor,
+    private readonly resetTodoInteractor: ResetTodoInteractor
   ) {}
 
   /**
@@ -33,5 +39,12 @@ export class TodoController {
    */
   public getList(request: GetListTodoRequest): GetListTodoResponse {
     return this.getListTodoInteractor.invoke(request);
+  }
+
+  /**
+   * 全件削除する
+   */
+  public reset(request: ResetTodoRequest): ResetTodoResponse {
+    return this.resetTodoInteractor.invoke(request);
   }
 }

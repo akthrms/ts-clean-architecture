@@ -2,10 +2,11 @@ import { prompt } from "inquirer";
 import { TodoController } from "../adapters/TodoController";
 import { GetListTodoPresenter } from "../adapters/TodoPresenter";
 import { TodoRepository } from "../repositories/TodoRepository";
+import { ResetTodoInteractor } from "../usecases/ResetTodoUsecase";
 import { CreateTodoInteractor } from "../usecases/CreateTodoUsecase";
 import { GetListTodoInteractor } from "../usecases/GetListTodoUsecase";
 
-const choices = ["TODO List", "New TODO"];
+const choices = ["List", "Add", "Reset"];
 
 const todoRepository = new TodoRepository();
 const createTodoInteractor = new CreateTodoInteractor(todoRepository);
@@ -14,13 +15,15 @@ const getListTodoInteractor = new GetListTodoInteractor(
   todoRepository,
   getListTodoPresenter
 );
+const resetTodoInteractor = new ResetTodoInteractor(todoRepository);
 const todoController = new TodoController(
   createTodoInteractor,
-  getListTodoInteractor
+  getListTodoInteractor,
+  resetTodoInteractor
 );
 
 /**
- * コマンド
+ * TODO コマンドを実行する
  */
 export const runTodoCommand = async () => {
   const { operation } = await prompt({
@@ -45,6 +48,11 @@ export const runTodoCommand = async () => {
         message: "input your todo content",
       });
       todoController.create({ content });
+      break;
+    }
+
+    case choices[2]: {
+      todoController.reset({});
       break;
     }
 

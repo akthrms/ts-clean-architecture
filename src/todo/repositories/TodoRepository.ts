@@ -26,4 +26,11 @@ export class TodoRepository implements ITodoRepository {
   findMany(): Todo[] {
     return todoList.filter(({ deletedAt }) => !deletedAt);
   }
+
+  /**
+   * 全件削除する
+   */
+  removeMany(): void {
+    todoList.splice(0);
+  }
 }
