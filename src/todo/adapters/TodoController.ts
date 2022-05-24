@@ -4,8 +4,8 @@ import type {
   CreateTodoResponse,
 } from "../usecases/CreateTodoUsecase";
 import type {
-  GetListRequest,
-  GetListResponse,
+  GetListTodoRequest,
+  GetListTodoResponse,
   GetListTodoInteractor,
 } from "../usecases/GetListTodoUsecase";
 
@@ -31,7 +31,7 @@ export class TodoController {
   /**
    * 全件取得する
    */
-  public getList(request: GetListRequest): GetListResponse {
+  public getList(request: GetListTodoRequest): GetListTodoResponse {
     return this.getListTodoInteractor.invoke(request);
   }
 }
