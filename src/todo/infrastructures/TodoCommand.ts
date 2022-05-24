@@ -2,9 +2,9 @@ import { prompt } from "inquirer";
 import { TodoController } from "../adapters/TodoController";
 import { GetListTodoPresenter } from "../adapters/TodoPresenter";
 import { TodoRepository } from "../repositories/TodoRepository";
-import { ResetTodoInteractor } from "../usecases/ResetTodoUsecase";
 import { CreateTodoInteractor } from "../usecases/CreateTodoUsecase";
 import { GetListTodoInteractor } from "../usecases/GetListTodoUsecase";
+import { ResetTodoInteractor } from "../usecases/ResetTodoUsecase";
 
 const choices = ["List", "Add", "Reset"];
 

@@ -1,4 +1,4 @@
-import type { ITodoRepository } from "../domains/ITodoRepository";
+import type { ITodoRepository } from "../domains/Todo";
 import type { Todo } from "../domains/Todo";
 
 /**

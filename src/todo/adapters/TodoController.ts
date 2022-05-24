@@ -1,18 +1,18 @@
 import type {
-  ResetTodoInteractor,
-  ResetTodoRequest,
-  ResetTodoResponse,
-} from "../usecases/ResetTodoUsecase";
-import type {
   CreateTodoInteractor,
   CreateTodoRequest,
   CreateTodoResponse,
 } from "../usecases/CreateTodoUsecase";
 import type {
+  GetListTodoInteractor,
   GetListTodoRequest,
   GetListTodoResponse,
-  GetListTodoInteractor,
 } from "../usecases/GetListTodoUsecase";
+import type {
+  ResetTodoInteractor,
+  ResetTodoRequest,
+  ResetTodoResponse,
+} from "../usecases/ResetTodoUsecase";
 
 /**
  * TODO コントローラー

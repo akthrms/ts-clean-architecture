@@ -1,7 +1,6 @@
 import { DateTime } from "luxon";
-import type { ITodoRepository } from "../domains/ITodoRepository";
-import type { Todo } from "../domains/Todo";
 import { nextId, todoList } from "../../store";
+import type { ITodoRepository, Todo } from "../domains/Todo";
 
 /**
  * TODO リポジトリ
