@@ -19,6 +19,9 @@ const todoController = new TodoController(
   getListTodoInteractor
 );
 
+/**
+ * コマンド
+ */
 export const runTodoCommand = async () => {
   const { operation } = await prompt({
     type: "list",
@@ -30,6 +33,7 @@ export const runTodoCommand = async () => {
   switch (operation) {
     case choices[0]: {
       const todoList = todoController.getList({}).todoList;
+      console.log("id, content, Y/D, created, updated");
       todoList.forEach((todo) => console.log(todo));
       break;
     }

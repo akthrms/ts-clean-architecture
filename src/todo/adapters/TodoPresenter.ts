@@ -1,4 +1,3 @@
-import type { DateTime } from "luxon";
 import type { Todo } from "../domains/Todo";
 import type {
   GetListTodoResponse,
@@ -16,17 +15,12 @@ export class GetListTodoPresenter implements IGetListTodoPresenter {
     return {
       todoList: todoList.map(
         ({ id, content, isDone, createdAt, updatedAt }) => {
-          const created = formatDateTime(createdAt);
-          const updated = formatDateTime(updatedAt);
-          return `${id}, ${content}, ${isDone}, ${created}, ${updated}`;
+          const done = isDone ? "D" : "Y";
+          const created = createdAt.toFormat("yyyy-MM-dd HH:mm:ss");
+          const updated = updatedAt.toFormat("yyyy-MM-dd HH:mm:ss");
+          return `${id}, ${content}, ${done}, ${created}, ${updated}`;
         }
       ),
     };
   }
 }
-
-/**
- * DateTime をファーマットする
- */
-const formatDateTime = (dateTime: DateTime): string =>
-  dateTime.toFormat("yyyy-MM-dd HH:mm:ss");
