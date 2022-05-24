@@ -1,7 +1,16 @@
-import { Todo } from "./Todo";
+import type { Todo } from "./Todo";
 
-interface ITodoRepository {
-  find(id: number): Todo | undefined;
+/**
+ * TODO レポジトリ
+ */
+export interface ITodoRepository {
+  /**
+   * 新規登録する
+   */
+  insert(content: string): void;
 
+  /**
+   * 全件取得する
+   */
   findMany(): Todo[];
 }
