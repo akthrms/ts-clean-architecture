@@ -26,7 +26,8 @@ export class EditTodoInteractor {
    * 実行
    */
   public invoke(request: EditTodoRequest): EditTodoResponse {
-    this.todoRepository.update(request.id, request.isDone);
+    const { id, isDone } = request;
+    this.todoRepository.update(id, isDone);
     return {};
   }
 }

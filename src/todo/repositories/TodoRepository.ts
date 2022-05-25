@@ -73,7 +73,7 @@ export class TodoRepository implements ITodoRepository {
       .findIndex((todo) => todo.id === id);
 
     if (index < 0) {
-      throw new Error("Todo Is Not Found");
+      throw new Error(`Todo Is Not Found, ID: ${id}`);
     }
 
     return index;

@@ -25,7 +25,8 @@ export class RemoveTodoInteractor {
    * 実行
    */
   public invoke(request: RemoveTodoRequest): RemoveTodoResponse {
-    this.todoRepository.remove(request.id);
+    const { id } = request;
+    this.todoRepository.remove(id);
     return {};
   }
 }

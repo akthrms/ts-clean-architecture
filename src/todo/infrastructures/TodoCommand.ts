@@ -38,6 +38,7 @@ export const runTodoCommand = async (): Promise<Command> => {
   try {
     console.log("Todo List:");
     console.log(todoController.getList({}).table.toString());
+    console.log("\n");
 
     const { operation } = await prompt({
       type: "list",
@@ -94,12 +95,14 @@ export const runTodoCommand = async (): Promise<Command> => {
       }
 
       default: {
-        throw new Error("Error Occurred");
+        throw new Error("Unreachable Code");
       }
     }
   } catch ({ message }) {
-    console.error(message);
+    console.error(`Error: ${message}`);
   }
+
+  console.log("\n");
 
   return "Continue";
 };

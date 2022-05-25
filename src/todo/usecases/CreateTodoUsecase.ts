@@ -25,7 +25,8 @@ export class CreateTodoInteractor {
    * 実行
    */
   public invoke(request: CreateTodoRequest): CreateTodoResponse {
-    this.todoRepository.insert(request.content);
+    const { content } = request;
+    this.todoRepository.insert(content);
     return {};
   }
 }
