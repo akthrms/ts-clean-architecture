@@ -25,12 +25,6 @@ export class RemoveTodoInteractor {
    * 実行
    */
   public invoke(request: RemoveTodoRequest): RemoveTodoResponse {
-    const todo = this.todoRepository.find(request.id);
-
-    if (!todo) {
-      throw new Error("Todo Is Not Found");
-    }
-
     this.todoRepository.remove(request.id);
     return {};
   }

@@ -1,7 +1,7 @@
 import type { DateTime } from "luxon";
 
 /**
- * TODO エンティティ
+ * Todo エンティティ
  */
 export type Todo = {
   id: number;
@@ -13,14 +13,9 @@ export type Todo = {
 };
 
 /**
- * TODO レポジトリ
+ * Todo レポジトリ
  */
 export interface ITodoRepository {
-  /**
-   * 1 件取得する
-   */
-  find(id: number): Todo | undefined;
-
   /**
    * 全件取得する
    */
@@ -32,9 +27,9 @@ export interface ITodoRepository {
   insert(content: string): void;
 
   /**
-   * 更新する
+   * 1 件更新する
    */
-  update(todo: Todo): void;
+  update(id: number, isDone: boolean): void;
 
   /**
    * 1 件削除する

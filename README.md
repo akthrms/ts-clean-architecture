@@ -17,8 +17,8 @@ src/
 ├── store.ts
 └── todo
     ├── adapters
-    │   ├── TodoController.ts
-    │   └── TodoPresenter.ts
+    │   ├── GetListTodoPresenter.ts
+    │   └── TodoController.ts
     ├── domains
     │   └── Todo.ts
     ├── infrastructures

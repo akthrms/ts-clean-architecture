@@ -1,18 +1,13 @@
 import { DateTime } from "luxon";
-import { nextId, todoList } from "../../store";
+import { todoList } from "../../store";
 import type { ITodoRepository, Todo } from "../domains/Todo";
 
 /**
- * TODO リポジトリ
+ * TODO: 永続化する
+ *
+ * Todo リポジトリ
  */
 export class TodoRepository implements ITodoRepository {
-  /**
-   * 1 件取得する
-   */
-  public find(id: number): Todo | undefined {
-    return todoList.filter((todo) => todo.id === id && !todo.deletedAt)[0];
-  }
-
   /**
    * 全件取得する
    */
@@ -25,7 +20,7 @@ export class TodoRepository implements ITodoRepository {
    */
   public insert(content: string): void {
     todoList.push({
-      id: nextId(),
+      id: this.getNextTodoId(),
       content: content,
       isDone: false,
       createdAt: DateTime.now(),
@@ -34,31 +29,21 @@ export class TodoRepository implements ITodoRepository {
   }
 
   /**
-   * 更新する
+   * 1 件更新する
    */
-  public update(todo: Todo): void {
-    const { id, content, isDone, createdAt, updatedAt } = todo;
-    for (let todo of todoList) {
-      if (todo.id === id) {
-        todo.content = content;
-        todo.isDone = isDone;
-        todo.createdAt = createdAt;
-        todo.updatedAt = updatedAt;
-        break;
-      }
-    }
+  public update(id: number, isDone: boolean): void {
+    const index = this.getTodoIndexById(id);
+    todoList[index]!.isDone = isDone;
+    todoList[index]!.updatedAt = DateTime.now();
   }
 
   /**
    * 1 件削除する
    */
   public remove(id: number): void {
-    for (let todo of todoList) {
-      if (todo.id === id) {
-        todo.deletedAt = DateTime.now();
-        break;
-      }
-    }
+    const index = this.getTodoIndexById(id);
+    todoList[index]!.updatedAt = DateTime.now();
+    todoList[index]!.deletedAt = DateTime.now();
   }
 
   /**
@@ -66,5 +51,25 @@ export class TodoRepository implements ITodoRepository {
    */
   public init(): void {
     todoList.splice(0);
+  }
+
+  /**
+   * 次の ID を取得する
+   */
+  private getNextTodoId(): number {
+    return todoList.reduce((max, { id }) => (max > id ? max : id), 0) + 1;
+  }
+
+  /**
+   * インデックスを取得する
+   */
+  private getTodoIndexById(id: number): number {
+    const index = todoList.findIndex((todo) => todo.id === id);
+
+    if (index < 0) {
+      throw new Error("Todo Is Not Found");
+    }
+
+    return index;
   }
 }

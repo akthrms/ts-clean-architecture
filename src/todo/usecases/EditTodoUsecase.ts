@@ -1,4 +1,3 @@
-import { DateTime } from "luxon";
 import type { ITodoRepository } from "../domains/Todo";
 
 /**
@@ -27,16 +26,7 @@ export class EditTodoInteractor {
    * 実行
    */
   public invoke(request: EditTodoRequest): EditTodoResponse {
-    const todo = this.todoRepository.find(request.id);
-
-    if (!todo) {
-      throw new Error("Todo Is Not Found");
-    }
-
-    todo!.isDone = request.isDone;
-    todo!.updatedAt = DateTime.now();
-
-    this.todoRepository.update(todo!);
+    this.todoRepository.update(request.id, request.isDone);
     return {};
   }
 }

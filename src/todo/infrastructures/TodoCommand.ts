@@ -1,6 +1,6 @@
 import { prompt } from "inquirer";
+import { GetListTodoPresenter } from "../adapters/GetListTodoPresenter";
 import { TodoController } from "../adapters/TodoController";
-import { GetListTodoPresenter } from "../adapters/TodoPresenter";
 import { TodoRepository } from "../repositories/TodoRepository";
 import { CreateTodoInteractor } from "../usecases/CreateTodoUsecase";
 import { EditTodoInteractor } from "../usecases/EditTodoUsecase";
@@ -18,6 +18,10 @@ const choices = [
   "Exit",
 ];
 
+const validateNumber = (value: string) => {
+  return !!value.match(/^\d*$/) || "Please Input a Number";
+};
+
 const todoRepository = new TodoRepository();
 const todoController = new TodoController(
   new GetListTodoInteractor(todoRepository, new GetListTodoPresenter()),
@@ -28,7 +32,7 @@ const todoController = new TodoController(
 );
 
 /**
- * TODO コマンドを実行する
+ * Todo コマンドを実行する
  */
 export const runTodoCommand = async (): Promise<Command> => {
   try {
@@ -58,8 +62,8 @@ export const runTodoCommand = async (): Promise<Command> => {
           type: "input",
           name: "id",
           message: "Input Todo ID",
+          validate: validateNumber,
         });
-
         const { isDone } = await prompt({
           type: "confirm",
           name: "isDone",
@@ -74,6 +78,7 @@ export const runTodoCommand = async (): Promise<Command> => {
           type: "input",
           name: "id",
           message: "Input Todo ID",
+          validate: validateNumber,
         });
         todoController.remove({ id: parseInt(id) });
         break;
@@ -92,8 +97,8 @@ export const runTodoCommand = async (): Promise<Command> => {
         throw new Error("Error Occurred");
       }
     }
-  } catch (e) {
-    console.error(e);
+  } catch ({ message }) {
+    console.error(message);
   }
 
   return "Continue";

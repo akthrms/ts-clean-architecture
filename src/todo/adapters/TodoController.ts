@@ -25,7 +25,7 @@ import type {
 } from "../usecases/ResetTodoUsecase";
 
 /**
- * TODO コントローラー
+ * Todo コントローラー
  */
 export class TodoController {
   /**
