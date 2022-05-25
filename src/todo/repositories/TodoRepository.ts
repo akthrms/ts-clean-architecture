@@ -1,5 +1,5 @@
 import { DateTime } from "luxon";
-import { nextId, todoList } from "../../Store";
+import { nextId, todoList } from "../../store";
 import type { ITodoRepository, Todo } from "../domains/Todo";
 
 /**

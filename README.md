@@ -1,5 +1,7 @@
 # Clean Architecture Sample
 
+Todo CLI App
+
 ## Usage
 
 ```
@@ -11,8 +13,8 @@ $ npm run ts-node
 
 ```
 src/
-├── App.ts
-├── Store.ts
+├── app.ts
+├── store.ts
 └── todo
     ├── adapters
     │   ├── TodoController.ts
