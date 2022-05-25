@@ -57,14 +57,20 @@ export class TodoRepository implements ITodoRepository {
    * 次の ID を取得する
    */
   private getNextTodoId(): number {
-    return todoList.reduce((max, { id }) => (max > id ? max : id), 0) + 1;
+    return (
+      todoList
+        .filter(({ deletedAt }) => !deletedAt)
+        .reduce((max, { id }) => (max > id ? max : id), 0) + 1
+    );
   }
 
   /**
    * インデックスを取得する
    */
   private getTodoIndexById(id: number): number {
-    const index = todoList.findIndex((todo) => todo.id === id);
+    const index = todoList
+      .filter(({ deletedAt }) => !deletedAt)
+      .findIndex((todo) => todo.id === id);
 
     if (index < 0) {
       throw new Error("Todo Is Not Found");
