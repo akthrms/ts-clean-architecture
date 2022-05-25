@@ -1,6 +1,6 @@
 import { prompt } from "inquirer";
-import { GetListTodoPresenter } from "../adapters/GetListTodoPresenter";
-import { TodoController } from "../adapters/TodoController";
+import { TodoController } from "../controllers/TodoController";
+import { GetListTodoPresenter } from "../presenters/GetListTodoPresenter";
 import { TodoRepository } from "../repositories/TodoRepository";
 import { CreateTodoInteractor } from "../usecases/CreateTodoUsecase";
 import { EditTodoInteractor } from "../usecases/EditTodoUsecase";

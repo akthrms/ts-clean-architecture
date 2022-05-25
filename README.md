@@ -16,13 +16,14 @@ src/
 ├── app.ts
 ├── store.ts
 └── todo
-    ├── adapters
-    │   ├── GetListTodoPresenter.ts
+    ├── controllers
     │   └── TodoController.ts
     ├── domains
     │   └── Todo.ts
     ├── infrastructures
     │   └── TodoCommand.ts
+    ├── presenters
+    │   └── GetListTodoPresenter.ts
     ├── repositories
     │   └── TodoRepository.ts
     └── usecases
