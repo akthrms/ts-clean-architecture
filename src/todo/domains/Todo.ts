@@ -17,9 +17,9 @@ export type Todo = {
  */
 export interface ITodoRepository {
   /**
-   * 新規登録する
+   * 1 件取得する
    */
-  insert(content: string): void;
+  find(id: number): Todo | undefined;
 
   /**
    * 全件取得する
@@ -27,7 +27,22 @@ export interface ITodoRepository {
   findMany(): Todo[];
 
   /**
-   * 全件削除する
+   * 新規登録する
    */
-  removeMany(): void;
+  insert(content: string): void;
+
+  /**
+   * 更新する
+   */
+  update(todo: Todo): void;
+
+  /**
+   * 1 件削除する
+   */
+  remove(id: number): void;
+
+  /**
+   * 初期化する
+   */
+  init(): void;
 }

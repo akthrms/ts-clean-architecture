@@ -23,7 +23,7 @@ export class ResetTodoInteractor {
    * 実行
    */
   public invoke(_request: ResetTodoRequest): ResetTodoResponse {
-    this.todoRepository.removeMany();
+    this.todoRepository.init();
     return {};
   }
 }

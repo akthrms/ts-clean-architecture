@@ -4,10 +4,20 @@ import type {
   CreateTodoResponse,
 } from "../usecases/CreateTodoUsecase";
 import type {
+  EditTodoInteractor,
+  EditTodoRequest,
+  EditTodoResponse,
+} from "../usecases/EditTodoUsecase";
+import type {
   GetListTodoInteractor,
   GetListTodoRequest,
   GetListTodoResponse,
 } from "../usecases/GetListTodoUsecase";
+import type {
+  RemoveTodoInteractor,
+  RemoveTodoRequest,
+  RemoveTodoResponse,
+} from "../usecases/RemoveTodoUsecase";
 import type {
   ResetTodoInteractor,
   ResetTodoRequest,
@@ -22,10 +32,19 @@ export class TodoController {
    * コンストラクタ
    */
   public constructor(
-    private readonly createTodoInteractor: CreateTodoInteractor,
     private readonly getListTodoInteractor: GetListTodoInteractor,
+    private readonly createTodoInteractor: CreateTodoInteractor,
+    private readonly editTodoInteractor: EditTodoInteractor,
+    private readonly removeTodoInteractor: RemoveTodoInteractor,
     private readonly resetTodoInteractor: ResetTodoInteractor
   ) {}
+
+  /**
+   * 全件取得する
+   */
+  public getList(request: GetListTodoRequest): GetListTodoResponse {
+    return this.getListTodoInteractor.invoke(request);
+  }
 
   /**
    * 新規作成する
@@ -35,10 +54,17 @@ export class TodoController {
   }
 
   /**
-   * 全件取得する
+   * 編集する
    */
-  public getList(request: GetListTodoRequest): GetListTodoResponse {
-    return this.getListTodoInteractor.invoke(request);
+  public edit(request: EditTodoRequest): EditTodoResponse {
+    return this.editTodoInteractor.invoke(request);
+  }
+
+  /**
+   * 1 件削除する
+   */
+  public remove(request: RemoveTodoRequest): RemoveTodoResponse {
+    return this.removeTodoInteractor.invoke(request);
   }
 
   /**

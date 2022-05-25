@@ -1,5 +1,5 @@
-import type { ITodoRepository } from "../domains/Todo";
-import type { Todo } from "../domains/Todo";
+import type { Table } from "cli-table3";
+import type { ITodoRepository, Todo } from "../domains/Todo";
 
 /**
  * 全件取得リクエスト
@@ -10,7 +10,7 @@ export type GetListTodoRequest = {};
  * 全件取得レスポンス
  */
 export type GetListTodoResponse = {
-  todoList: string[];
+  table: Table;
 };
 
 /**
