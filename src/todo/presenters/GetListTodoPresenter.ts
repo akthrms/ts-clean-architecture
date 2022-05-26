@@ -14,13 +14,13 @@ export class GetListTodoPresenter implements IGetListTodoPresenter {
    */
   public invoke(todoList: Todo[]): GetListTodoResponse {
     const table = new Table({
-      head: ["ID", "Content", "Status", "Created", "Updated"],
+      head: ["id", "content", "status", "created", "updated"],
     });
     todoList.forEach(({ id, content, isDone, createdAt, updatedAt }) => {
       table.push([
         id,
         content,
-        isDone ? "Done" : "Yet",
+        isDone ? "done" : "yet",
         createdAt.toFormat("yyyy-MM-dd HH:mm"),
         updatedAt.toFormat("yyyy-MM-dd HH:mm"),
       ]);

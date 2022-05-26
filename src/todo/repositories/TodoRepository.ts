@@ -1,6 +1,10 @@
 import { DateTime } from "luxon";
-import { todoList } from "../../store";
 import type { ITodoRepository, Todo } from "../domains/Todo";
+
+/**
+ * Todo リスト（インメモリ）
+ */
+export let inMemoryTodoList: Todo[] = [];
 
 /**
  * TODO: 永続化する
@@ -12,14 +16,14 @@ export class TodoRepository implements ITodoRepository {
    * 全件取得する
    */
   public findMany(): Todo[] {
-    return todoList.filter(({ deletedAt }) => !deletedAt);
+    return inMemoryTodoList.filter(({ deletedAt }) => !deletedAt);
   }
 
   /**
    * 新規登録する
    */
   public insert(content: string): void {
-    todoList.push({
+    inMemoryTodoList.push({
       id: this.getNextTodoId(),
       content: content,
       isDone: false,
@@ -33,8 +37,8 @@ export class TodoRepository implements ITodoRepository {
    */
   public update(id: number, isDone: boolean): void {
     const index = this.getTodoIndexById(id);
-    todoList[index]!.isDone = isDone;
-    todoList[index]!.updatedAt = DateTime.now();
+    inMemoryTodoList[index]!.isDone = isDone;
+    inMemoryTodoList[index]!.updatedAt = DateTime.now();
   }
 
   /**
@@ -42,32 +46,34 @@ export class TodoRepository implements ITodoRepository {
    */
   public remove(id: number): void {
     const index = this.getTodoIndexById(id);
-    todoList[index]!.updatedAt = DateTime.now();
-    todoList[index]!.deletedAt = DateTime.now();
+    inMemoryTodoList[index]!.updatedAt = DateTime.now();
+    inMemoryTodoList[index]!.deletedAt = DateTime.now();
   }
 
   /**
    * 初期化する
    */
   public init(): void {
-    todoList.splice(0);
+    inMemoryTodoList.splice(0);
   }
 
   /**
    * 次の ID を取得する
    */
   private getNextTodoId(): number {
-    return todoList.reduce((max, { id }) => (max > id ? max : id), 0) + 1;
+    return (
+      inMemoryTodoList.reduce((max, { id }) => (max > id ? max : id), 0) + 1
+    );
   }
 
   /**
    * インデックスを取得する
    */
   private getTodoIndexById(id: number): number {
-    const index = todoList.findIndex((todo) => todo.id === id);
+    const index = inMemoryTodoList.findIndex((todo) => todo.id === id);
 
     if (index < 0) {
-      throw new Error(`Todo Is Not Found, ID: ${id}`);
+      throw new Error(`Todo is not found, id: ${id}`);
     }
 
     return index;

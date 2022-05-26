@@ -14,7 +14,6 @@ $ npm run ts-node
 ```
 src/
 ├── app.ts
-├── store.ts
 └── todo
     ├── controllers
     │   └── TodoController.ts
